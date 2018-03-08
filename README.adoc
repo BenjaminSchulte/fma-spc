@@ -1,0 +1,15 @@
+FMA SPC
+=======
+
+SPC assembler plugin for FMA assembler.
+
+This plugin is still work in progress.
+
+== Installation
+
+This package can be used with the https://github.com/BenjaminSchulte/fma[FMA] assembler.
+
+
+== License
+
+FMA is licensed with the link:./LICENSE.md[MIT] license. Author: Benjamin Schulte
