@@ -31,7 +31,7 @@ export default class InstructionCompiler {
     const collection = new InstructionCollection();collection.add("NOP", 0x00, InstructionType.get());
     collection.add("TCALL0", 0x01, InstructionType.get());
     collection.add("SET0", 0x02, InstructionType.get("d", "r"));
-    collection.add("BBS0", 0x03, InstructionType.get("d", "r"));
+    collection.add("BBS0", 0x03, InstructionType.getRev("d", "r"));
     collection.add("OR", 0x04, InstructionType.get("A", "d"));
     collection.add("OR", 0x05, InstructionType.get("A", "!a"));
     collection.add("OR", 0x06, InstructionType.get("A", "(X)"));
@@ -47,7 +47,7 @@ export default class InstructionCompiler {
     collection.add("BPL", 0x10, InstructionType.get("r"));
     collection.add("TCALL1", 0x11, InstructionType.get());
     collection.add("CLR0", 0x12, InstructionType.get("d", "r"));
-    collection.add("BBC0", 0x13, InstructionType.get("d", "r"));
+    collection.add("BBC0", 0x13, InstructionType.getRev("d", "r"));
     collection.add("OR", 0x14, InstructionType.get("A", "d+X"));
     collection.add("OR", 0x15, InstructionType.get("A", "!a+X"));
     collection.add("OR", 0x16, InstructionType.get("A", "!a+Y"));
@@ -63,7 +63,7 @@ export default class InstructionCompiler {
     collection.add("CLRP", 0x20, InstructionType.get());
     collection.add("TCALL2", 0x21, InstructionType.get());
     collection.add("SET1", 0x22, InstructionType.get("d", "r"));
-    collection.add("BBS1", 0x23, InstructionType.get("d", "r"));
+    collection.add("BBS1", 0x23, InstructionType.getRev("d", "r"));
     collection.add("AND", 0x24, InstructionType.get("A", "d"));
     collection.add("AND", 0x25, InstructionType.get("A", "!a"));
     collection.add("AND", 0x26, InstructionType.get("A", "(X)"));
@@ -79,7 +79,7 @@ export default class InstructionCompiler {
     collection.add("BMI", 0x30, InstructionType.get("r"));
     collection.add("TCALL3", 0x31, InstructionType.get());
     collection.add("CLR1", 0x32, InstructionType.get("d", "r"));
-    collection.add("BBC1", 0x33, InstructionType.get("d", "r"));
+    collection.add("BBC1", 0x33, InstructionType.getRev("d", "r"));
     collection.add("AND", 0x34, InstructionType.get("A", "d+X"));
     collection.add("AND", 0x35, InstructionType.get("A", "!a+X"));
     collection.add("AND", 0x36, InstructionType.get("A", "!a+Y"));
@@ -95,7 +95,7 @@ export default class InstructionCompiler {
     collection.add("SETP", 0x40, InstructionType.get());
     collection.add("TCALL4", 0x41, InstructionType.get());
     collection.add("SET2", 0x42, InstructionType.get("d", "r"));
-    collection.add("BBS2", 0x43, InstructionType.get("d", "r"));
+    collection.add("BBS2", 0x43, InstructionType.getRev("d", "r"));
     collection.add("EOR", 0x44, InstructionType.get("A", "d"));
     collection.add("EOR", 0x45, InstructionType.get("A", "!a"));
     collection.add("EOR", 0x46, InstructionType.get("A", "(X)"));
@@ -111,7 +111,7 @@ export default class InstructionCompiler {
     collection.add("BVC", 0x50, InstructionType.get("r"));
     collection.add("TCALL5", 0x51, InstructionType.get());
     collection.add("CLR2", 0x52, InstructionType.get("d", "r"));
-    collection.add("BBC2", 0x53, InstructionType.get("d", "r"));
+    collection.add("BBC2", 0x53, InstructionType.getRev("d", "r"));
     collection.add("EOR", 0x54, InstructionType.get("A", "d+X"));
     collection.add("EOR", 0x55, InstructionType.get("A", "!a+X"));
     collection.add("EOR", 0x56, InstructionType.get("A", "!a+Y"));
@@ -127,7 +127,7 @@ export default class InstructionCompiler {
     collection.add("CLRC", 0x60, InstructionType.get());
     collection.add("TCALL6", 0x61, InstructionType.get());
     collection.add("SET3", 0x62, InstructionType.get("d", "r"));
-    collection.add("BBS3", 0x63, InstructionType.get("d", "r"));
+    collection.add("BBS3", 0x63, InstructionType.getRev("d", "r"));
     collection.add("CMP", 0x64, InstructionType.get("A", "d"));
     collection.add("CMP", 0x65, InstructionType.get("A", "!a"));
     collection.add("CMP", 0x66, InstructionType.get("A", "(X)"));
@@ -143,7 +143,7 @@ export default class InstructionCompiler {
     collection.add("BVS", 0x70, InstructionType.get("r"));
     collection.add("TCALL7", 0x71, InstructionType.get());
     collection.add("CLR3", 0x72, InstructionType.get("d", "r"));
-    collection.add("BBC3", 0x73, InstructionType.get("d", "r"));
+    collection.add("BBC3", 0x73, InstructionType.getRev("d", "r"));
     collection.add("CMP", 0x74, InstructionType.get("A", "d+X"));
     collection.add("CMP", 0x75, InstructionType.get("A", "!a+X"));
     collection.add("CMP", 0x76, InstructionType.get("A", "!a+Y"));
@@ -159,7 +159,7 @@ export default class InstructionCompiler {
     collection.add("SETC", 0x80, InstructionType.get());
     collection.add("TCALL8", 0x81, InstructionType.get());
     collection.add("SET4", 0x82, InstructionType.get("d", "r"));
-    collection.add("BBS4", 0x83, InstructionType.get("d", "r"));
+    collection.add("BBS4", 0x83, InstructionType.getRev("d", "r"));
     collection.add("ADC", 0x84, InstructionType.get("A", "d"));
     collection.add("ADC", 0x85, InstructionType.get("A", "!a"));
     collection.add("ADC", 0x86, InstructionType.get("A", "(X)"));
@@ -175,7 +175,7 @@ export default class InstructionCompiler {
     collection.add("BCC", 0x90, InstructionType.get("r"));
     collection.add("TCALL9", 0x91, InstructionType.get());
     collection.add("CLR4", 0x92, InstructionType.get("d", "r"));
-    collection.add("BBC4", 0x93, InstructionType.get("d", "r"));
+    collection.add("BBC4", 0x93, InstructionType.getRev("d", "r"));
     collection.add("ADC", 0x94, InstructionType.get("A", "d+X"));
     collection.add("ADC", 0x95, InstructionType.get("A", "!a+X"));
     collection.add("ADC", 0x96, InstructionType.get("A", "!a+Y"));
@@ -191,7 +191,7 @@ export default class InstructionCompiler {
     collection.add("EI", 0xA0, InstructionType.get());
     collection.add("TCALL10", 0xA1, InstructionType.get());
     collection.add("SET5", 0xA2, InstructionType.get("d", "r"));
-    collection.add("BBS5", 0xA3, InstructionType.get("d", "r"));
+    collection.add("BBS5", 0xA3, InstructionType.getRev("d", "r"));
     collection.add("SBC", 0xA4, InstructionType.get("A", "d"));
     collection.add("SBC", 0xA5, InstructionType.get("A", "!a"));
     collection.add("SBC", 0xA6, InstructionType.get("A", "(X)"));
@@ -207,7 +207,7 @@ export default class InstructionCompiler {
     collection.add("BCS", 0xB0, InstructionType.get("r"));
     collection.add("TCALL11", 0xB1, InstructionType.get());
     collection.add("CLR5", 0xB2, InstructionType.get("d", "r"));
-    collection.add("BBC5", 0xB3, InstructionType.get("d", "r"));
+    collection.add("BBC5", 0xB3, InstructionType.getRev("d", "r"));
     collection.add("SBC", 0xB4, InstructionType.get("A", "d+X"));
     collection.add("SBC", 0xB5, InstructionType.get("A", "!a+X"));
     collection.add("SBC", 0xB6, InstructionType.get("A", "!a+Y"));
@@ -223,7 +223,7 @@ export default class InstructionCompiler {
     collection.add("DI", 0xC0, InstructionType.get());
     collection.add("TCALL12", 0xC1, InstructionType.get());
     collection.add("SET6", 0xC2, InstructionType.get("d", "r"));
-    collection.add("BBS6", 0xC3, InstructionType.get("d", "r"));
+    collection.add("BBS6", 0xC3, InstructionType.getRev("d", "r"));
     collection.add("MOV", 0xC4, InstructionType.get("d", "A"));
     collection.add("MOV", 0xC5, InstructionType.get("!a", "A"));
     collection.add("MOV", 0xC6, InstructionType.get("(X)", "A"));
@@ -239,7 +239,7 @@ export default class InstructionCompiler {
     collection.add("BNE", 0xD0, InstructionType.get("r"));
     collection.add("TCALL13", 0xD1, InstructionType.get());
     collection.add("CLR6", 0xD2, InstructionType.get("d", "r"));
-    collection.add("BBC6", 0xD3, InstructionType.get("d", "r"));
+    collection.add("BBC6", 0xD3, InstructionType.getRev("d", "r"));
     collection.add("MOV", 0xD4, InstructionType.get("d+X", "A"));
     collection.add("MOV", 0xD5, InstructionType.get("!a+X", "A"));
     collection.add("MOV", 0xD6, InstructionType.get("!a+Y", "A"));
@@ -255,7 +255,7 @@ export default class InstructionCompiler {
     collection.add("CLRV", 0xE0, InstructionType.get());
     collection.add("TCALL14", 0xE1, InstructionType.get());
     collection.add("SET7", 0xE2, InstructionType.get("d", "r"));
-    collection.add("BBS7", 0xE3, InstructionType.get("d", "r"));
+    collection.add("BBS7", 0xE3, InstructionType.getRev("d", "r"));
     collection.add("MOV", 0xE4, InstructionType.get("A", "d"));
     collection.add("MOV", 0xE5, InstructionType.get("A", "!a"));
     collection.add("MOV", 0xE6, InstructionType.get("A", "(X)"));
@@ -271,7 +271,7 @@ export default class InstructionCompiler {
     collection.add("BEQ", 0xF0, InstructionType.get("r"));
     collection.add("TCALL15", 0xF1, InstructionType.get());
     collection.add("CLR7", 0xF2, InstructionType.get("d", "r"));
-    collection.add("BBC7", 0xF3, InstructionType.get("d", "r"));
+    collection.add("BBC7", 0xF3, InstructionType.getRev("d", "r"));
     collection.add("MOV", 0xF4, InstructionType.get("A", "d+X"));
     collection.add("MOV", 0xF5, InstructionType.get("A", "!a+X"));
     collection.add("MOV", 0xF6, InstructionType.get("A", "!a+Y"));

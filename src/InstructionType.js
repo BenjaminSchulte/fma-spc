@@ -12,14 +12,6 @@ export default class InstructionType {
     this.writer = writer;
   }
 
-  static impl() {
-    return new InstructionType(
-      Parameter.NONE,
-      Parameter.NONE,
-      InstructionWriter.impl
-    )
-  }
-
   static _conv(op) {
     if (op === null) {
       return Parameter.NONE;
@@ -46,13 +38,53 @@ export default class InstructionType {
       case '[d+X]': return Parameter.INDIRECT_DP_X;
       case '[d]+Y': return Parameter.INDIRECT_DP_THEN_Y;
       case 'r': return Parameter.ADDRESS;
+      case 'r16': return Parameter.ADDRESS;
       default: throw new Error('Unknown operand: ' + op)
     }
   }
 
+  static _writer(type, name) {
+    switch (name) {
+      case 'r': return InstructionWriter.rel8;
+      case 'r16': return InstructionWriter.rel16;
+    }
+
+    switch (type) {
+      case Parameter.ADDRESS:
+      case Parameter.ADDRESS_X:
+      case Parameter.ADDRESS_Y:
+        return InstructionWriter.imm16;
+
+      case Parameter.CONSTANT:
+        return InstructionWriter.imm8;
+
+      case Parameter.INDIRECT_DP_X:
+      case Parameter.INDIRECT_DP_THEN_Y:
+      case Parameter.DP:
+      case Parameter.DP_X:
+      case Parameter.DP_Y:
+        return InstructionWriter.directPage;
+
+      default:
+        return InstructionWriter.impl;
+    }
+  }
+
   static get(left=null, right=null) {
-    left = this._conv(left);
-    right = this._conv(right);
-    return new InstructionType(left, right, InstructionWriter.impl)
+    const opLeft = this._conv(left);
+    const opRight = this._conv(right);
+
+    const writeLeft = this._writer(opLeft, left);
+    const writeRight = this._writer(opRight, right);
+    return new InstructionType(opLeft, opRight, InstructionWriter.pair(writeLeft, writeRight))
+  }
+
+  static getRev(left=null, right=null) {
+    const opLeft = this._conv(left);
+    const opRight = this._conv(right);
+
+    const writeLeft = this._writer(opLeft, left);
+    const writeRight = this._writer(opRight, right);
+    return new InstructionType(opLeft, opRight, InstructionWriter.pairRev(writeLeft, writeRight))
   }
 }

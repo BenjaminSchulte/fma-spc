@@ -53,6 +53,10 @@ class Number
     num.parameter = parameter
     num
   end
+
+  macro to_future_number
+    self
+  end
 end
 
 class TypedNumber
@@ -128,9 +132,9 @@ end
 
 ;; Support addr(number) syntax
 macro addr(number, parameter=nil)
-    num = TypedNumber.new self, :address
-    num.parameter = parameter
-    num
+  num = TypedNumber.new number.to_future_number, :address
+  num.parameter = parameter
+  num
 end
 
 ;; Allocates a new RAM scope

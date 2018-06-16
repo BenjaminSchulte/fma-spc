@@ -10,6 +10,13 @@ class Code {
       static: function(code, value) {code.writeUInt8(value);},
       calc: function(code, value) {code.writeCalculation(value, 1);}
     });
+
+    this.writeUInt16 = this._write({
+      static: function(code, value) {
+        code.writeUInt16LE(value);
+      },
+      calc: function(code, value) {code.writeCalculation(value, 2);}
+    });
   }
 
   _write(callbacks) {
@@ -44,6 +51,16 @@ class Parameter {
     this.rawValue = object;
 
     this.parse(context, object);
+  }
+
+  toNumber(context, object) {
+    if (object.hasMember('to_future_number')) {
+      return object.getMember('to_future_number').callWithParameters(context);
+    } else if (object.hasMember('to_n')) {
+      return object.getMember('to_n').callWithParameters(context);
+    } else {
+      throw new Error('Unknown how to convert to number: ' + object.getClassName());
+    }
   }
 
   parseInnerType(object) {
