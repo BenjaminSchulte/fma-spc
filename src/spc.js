@@ -19,6 +19,22 @@ class CompilerMemoryManager
   end
 end
 
+class CompilerScope
+  macro on_enter_function(function)
+    Compiler.current_scope.is_return_opcode = false
+    Compiler.current_scope.current_function = function.name
+  end
+
+  macro on_leave_function(function)
+    return if Compiler.current_scope.is_return_opcode
+    RET
+  end
+
+  macro on_call_function(function)
+    CALL function
+  end
+end
+
 ;; Future number
 class FutureNumber
 

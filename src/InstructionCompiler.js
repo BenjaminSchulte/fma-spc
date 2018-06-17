@@ -74,7 +74,7 @@ export default class InstructionCompiler {
     collection.add("ROL", 0x2B, InstructionType.get("d"));
     collection.add("ROL", 0x2C, InstructionType.get("!a"));
     collection.add("PUSH", 0x2D, InstructionType.get("A"));
-    collection.add("CBNE", 0x2E, InstructionType.get("d", "r"));
+    collection.add("CBNE", 0x2E, InstructionType.getRev("d", "r"));
     collection.add("BRA", 0x2F, InstructionType.get("r"));
     collection.add("BMI", 0x30, InstructionType.get("r"));
     collection.add("TCALL3", 0x31, InstructionType.get());
@@ -203,7 +203,7 @@ export default class InstructionCompiler {
     collection.add("INC", 0xAC, InstructionType.get("!a"));
     collection.add("CMP", 0xAD, InstructionType.get("Y", "#i"));
     collection.add("POP", 0xAE, InstructionType.get("A"));
-    // Unknown type: MOV (X)+, A -> AF
+    collection.add("MOVI", 0xAF, InstructionType.get("(X)", "A"));
     collection.add("BCS", 0xB0, InstructionType.get("r"));
     collection.add("TCALL11", 0xB1, InstructionType.get());
     collection.add("CLR5", 0xB2, InstructionType.get("d", "r"));
@@ -219,7 +219,7 @@ export default class InstructionCompiler {
     collection.add("INC", 0xBC, InstructionType.get("A"));
     collection.add("MOV", 0xBD, InstructionType.get("SP", "X"));
     collection.add("DAS", 0xBE, InstructionType.get("A"));
-    // Unknown type: MOV A, (X)+ -> BF
+    collection.add("MOVI", 0xBF, InstructionType.get("A", "(X)"));
     collection.add("DI", 0xC0, InstructionType.get());
     collection.add("TCALL12", 0xC1, InstructionType.get());
     collection.add("SET6", 0xC2, InstructionType.get("d", "r"));
@@ -250,7 +250,7 @@ export default class InstructionCompiler {
     collection.add("MOV", 0xDB, InstructionType.get("d+X", "Y"));
     collection.add("DEC", 0xDC, InstructionType.get("Y"));
     collection.add("MOV", 0xDD, InstructionType.get("Y", "A"));
-    collection.add("CBNE", 0xDE, InstructionType.get("d+X", "r"));
+    collection.add("CBNE", 0xDE, InstructionType.getRev("d+X", "r"));
     collection.add("DAA", 0xDF, InstructionType.get("A"));
     collection.add("CLRV", 0xE0, InstructionType.get());
     collection.add("TCALL14", 0xE1, InstructionType.get());
