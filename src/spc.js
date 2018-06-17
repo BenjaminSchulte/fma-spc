@@ -93,7 +93,7 @@ module SPC
   RAM = CompilerMemoryManager.new
   ROM = RAM
   Compiler.register_static_memory ROM
-  ROM.allow range:0..$FFFF
+  ROM.allow range:0..$FFC0
 
   ;; All common data registers can be extended using this class
   class Register
@@ -200,6 +200,24 @@ macro declare(name, as, in=nil, at=nil, length=nil)
 
   callee[name] = ram
   ram
+end
+
+class __RoutineList
+  macro add(addr)
+    Compiler.current_scope.dw addr
+  end
+end
+
+;; Creates a list of routines
+macro routine_list(as=nil, name=nil, **kwargs)
+  var = Compiler.define name do
+    SPC.locate_at **kwargs
+    yield __RoutineList.new
+    Compiler.current_scope.is_return_opcode = true
+  end
+
+  callee[as] = var.to_future_number unless as.nil?
+  var.to_future_number
 end
 
 ;; Sets the location of all functions
