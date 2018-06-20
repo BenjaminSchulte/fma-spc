@@ -173,6 +173,7 @@ export default class InstructionCompiler {
     collection.add("POP", 0x8E, InstructionType.get("PSW"));
     collection.add("MOV", 0x8F, InstructionType.get("d", "#i"));
     collection.add("BCC", 0x90, InstructionType.get("r"));
+    collection.add("BLT", 0x90, InstructionType.get("r"));
     collection.add("TCALL9", 0x91, InstructionType.get());
     collection.add("CLR4", 0x92, InstructionType.get("d", "r"));
     collection.add("BBC4", 0x93, InstructionType.getRev("d", "r"));
@@ -205,6 +206,7 @@ export default class InstructionCompiler {
     collection.add("POP", 0xAE, InstructionType.get("A"));
     collection.add("MOVI", 0xAF, InstructionType.get("(X)", "A"));
     collection.add("BCS", 0xB0, InstructionType.get("r"));
+    collection.add("BGE", 0xB0, InstructionType.get("r"));
     collection.add("TCALL11", 0xB1, InstructionType.get());
     collection.add("CLR5", 0xB2, InstructionType.get("d", "r"));
     collection.add("BBC5", 0xB3, InstructionType.getRev("d", "r"));
@@ -237,6 +239,7 @@ export default class InstructionCompiler {
     collection.add("POP", 0xCE, InstructionType.get("X"));
     collection.add("MUL", 0xCF, InstructionType.get("YA"));
     collection.add("BNE", 0xD0, InstructionType.get("r"));
+    collection.add("BNZ", 0xD0, InstructionType.get("r"));
     collection.add("TCALL13", 0xD1, InstructionType.get());
     collection.add("CLR6", 0xD2, InstructionType.get("d", "r"));
     collection.add("BBC6", 0xD3, InstructionType.getRev("d", "r"));
@@ -249,7 +252,7 @@ export default class InstructionCompiler {
     collection.add("MOVW", 0xDA, InstructionType.get("d", "YA"));
     collection.add("MOV", 0xDB, InstructionType.get("d+X", "Y"));
     collection.add("DEC", 0xDC, InstructionType.get("Y"));
-    collection.add("MOV", 0xDD, InstructionType.get("Y", "A"));
+    collection.add("MOV", 0xDD, InstructionType.get("A", "Y"));
     collection.add("CBNE", 0xDE, InstructionType.getRev("d+X", "r"));
     collection.add("DAA", 0xDF, InstructionType.get("A"));
     collection.add("CLRV", 0xE0, InstructionType.get());
@@ -269,6 +272,7 @@ export default class InstructionCompiler {
     collection.add("POP", 0xEE, InstructionType.get("Y"));
     collection.add("SLEEP", 0xEF, InstructionType.get());
     collection.add("BEQ", 0xF0, InstructionType.get("r"));
+    collection.add("BZE", 0xF0, InstructionType.get("r"));
     collection.add("TCALL15", 0xF1, InstructionType.get());
     collection.add("CLR7", 0xF2, InstructionType.get("d", "r"));
     collection.add("BBC7", 0xF3, InstructionType.getRev("d", "r"));
