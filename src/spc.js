@@ -208,6 +208,18 @@ class __RoutineList
   end
 end
 
+;; Memory block declaration
+macro memory_block(as=nil, name=nil, **kwargs)
+  var = Compiler.define name do
+    SPC.locate_at **kwargs
+    yield Compiler.current_scope
+    Compiler.current_scope.is_return_opcode = true
+  end
+
+  callee[as] = var.to_future_number unless as.nil?
+  var.to_future_number
+end
+
 ;; Creates a list of routines
 macro routine_list(as=nil, name=nil, **kwargs)
   var = Compiler.define name do
