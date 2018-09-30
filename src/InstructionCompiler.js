@@ -1,5 +1,6 @@
 import InstructionType from './InstructionType';
 import Instruction from './Instruction';
+import MemBitInstruction from './MemBitInstruction';
 import {MacroObject, ArgumentList, BooleanObject, InternalValue} from 'fma';
 
 class InstructionCollection {
@@ -17,6 +18,10 @@ class InstructionCollection {
     this.instructions[name].add(type, opcode, callback);
   }
 
+  addMemBit(name, leftOpcode, rightOpcode) {
+    this.instructions[name] = new MemBitInstruction(name, leftOpcode, rightOpcode);
+  }
+
   compile(project, interpreter) {
     const root = interpreter.getRoot();
 
@@ -28,7 +33,9 @@ class InstructionCollection {
 
 export default class InstructionCompiler {
   implementTo(project, interpreter) {
-    const collection = new InstructionCollection();collection.add("NOP", 0x00, InstructionType.get());
+    const collection = new InstructionCollection();
+
+    collection.add("NOP", 0x00, InstructionType.get());
     collection.add("TCALL0", 0x01, InstructionType.get());
     collection.add("SET0", 0x02, InstructionType.get("d"));
     collection.add("BBS0", 0x03, InstructionType.getRev("d", "r"));
@@ -199,7 +206,7 @@ export default class InstructionCompiler {
     collection.add("SBC", 0xA7, InstructionType.get("A", "[d+X]"));
     collection.add("SBC", 0xA8, InstructionType.get("A", "#i"));
     collection.add("SBC", 0xA9, InstructionType.get("d", "d"));
-    // Unknown type: MOV1 C, m.b -> AA
+    collection.addMemBit("MOV1", 0xAA, 0xCA)
     collection.add("INC", 0xAB, InstructionType.get("d"));
     collection.add("INC", 0xAC, InstructionType.get("!a"));
     collection.add("CMP", 0xAD, InstructionType.get("Y", "#i"));
@@ -232,7 +239,7 @@ export default class InstructionCompiler {
     collection.add("MOV", 0xC7, InstructionType.get("[d+X]", "A"));
     collection.add("CMP", 0xC8, InstructionType.get("X", "#i"));
     collection.add("MOV", 0xC9, InstructionType.get("!a", "X"));
-    // Unknown type: MOV1 m.b, C -> CA
+
     collection.add("MOV", 0xCB, InstructionType.get("d", "Y"));
     collection.add("MOV", 0xCC, InstructionType.get("!a", "Y"));
     collection.add("MOV", 0xCD, InstructionType.get("X", "#i"));
@@ -265,7 +272,7 @@ export default class InstructionCompiler {
     collection.add("MOV", 0xE7, InstructionType.get("A", "[d+X]"));
     collection.add("MOV", 0xE8, InstructionType.get("A", "#i"));
     collection.add("MOV", 0xE9, InstructionType.get("X", "!a"));
-    // Unknown type: NOT1 m.b -> EA
+    collection.addMemBit("NOT1", 0xEA);
     collection.add("MOV", 0xEB, InstructionType.get("Y", "d"));
     collection.add("MOV", 0xEC, InstructionType.get("Y", "!a"));
     collection.add("NOTC", 0xED, InstructionType.get());

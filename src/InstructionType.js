@@ -19,6 +19,7 @@ export default class InstructionType {
 
     switch (op) {
       case '': return Parameter.NONE;
+      case 'C': return Parameter.C;
       case '!a': return Parameter.ADDRESS;
       case '!a+X': return Parameter.ADDRESS_X;
       case '[!a+X]': return Parameter.ADDRESS_X;

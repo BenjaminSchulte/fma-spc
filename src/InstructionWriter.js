@@ -7,6 +7,10 @@ export default class InstructionWriter {
         number = number.getCalculation();
         break;
 
+      case 'Number':
+        number = new StaticNumber(number.getMember('__value').value);
+        break;
+
       default:
         throw new Error('Can not process rel8 with ' + number.getClassName());
     }

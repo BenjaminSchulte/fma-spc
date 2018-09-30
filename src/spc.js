@@ -127,6 +127,9 @@ X = SPC::Register.new "X"
 ;; The index register Y
 Y = SPC::Register.new "Y"
 
+;; The index register C
+C = SPC::Register.new "C"
+
 ;; The index register YA
 YA = SPC::Register.new "YA"
 

@@ -20,12 +20,15 @@ const ADDRESS_X = 16;
 const INDIRECT_ADDRESS_X = 17;
 const ADDRESS_Y = 18;
 
+const C = 19;
+
 
 export {
   NONE,
   A,
   X,
   Y,
+  C,
   SP,
   PSW,
   ADDRESS,
